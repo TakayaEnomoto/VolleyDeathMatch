@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BA043473-5D2C-1A70-0108-54646CB3A292}</ProjectGuid>
+    <ProjectGuid>{302CF380-BC9A-A649-9EB1-9EF3F02960E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,33 +62,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\P1Controller.cs" />
+    <Compile Include="Assets\Scripts\P1Controller.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/NYU/Unity3D2/Projects/VolleyDeathMatch/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/NYU/Unity3D2/UnityProgramfiles/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
