@@ -13,15 +13,30 @@ public class P1Controller : MonoBehaviour
 
     public GameObject VisualBox;
 
+    //Dash
     public float DashCount = 0f;
-    public float DashTime = .5f;
+    public float DashCountDefault;
+    public float DashTime = .2f;
+    public float DashTimeDefault = .2f;
     public bool canDash = true;
     public bool Dashing = false;
     public Vector3 DashVector;
+    //
+    //Jump
+    public bool canJump = true;
+    public bool Jumping = false;
+    public float JumpSpeed;
+    public Vector3 MaxJumpSpeed;
+    public Vector3 MinJumpSpeed;
+    public float jumpTime;
+    public float jumpTimeDefault;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        DashTime = DashTimeDefault;
+        jumpTime = jumpTimeDefault;
     }
 
     public float mouseX;
@@ -46,7 +61,7 @@ public class P1Controller : MonoBehaviour
             {
                 DashVector = inputVector;
                 Dashing = true;
-                DashCount = 10f;
+                DashCount = DashCountDefault;
             }
             else
             {
@@ -63,7 +78,7 @@ public class P1Controller : MonoBehaviour
         }
         if (DashTime <= 0)
         {
-            DashTime = .5f;
+            DashTime = DashTimeDefault;
             Dashing = false;
         }
         else
@@ -71,6 +86,24 @@ public class P1Controller : MonoBehaviour
 
         }
         //
+
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Slash) && canJump)
+        {
+            Jumping = true;
+            canJump = false;
+        }
+
+        if (Jumping)
+        {
+            jumpTime -= Time.deltaTime;
+        }
+
+        if(jumpTime <= 0)
+        {
+            jumpTime = jumpTimeDefault;
+            Jumping = false;
+        }
 
         //View
         mouseX = Input.GetAxis("Mouse X");
@@ -91,8 +124,9 @@ public class P1Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = inputVector * moveSpeed + Physics.gravity * .69f;
+        rb.velocity = inputVector * moveSpeed + Physics.gravity * .3f;
         Dash();
+        Jump();
     }
 
     //DashVoid
@@ -100,7 +134,17 @@ public class P1Controller : MonoBehaviour
     {
         if (Dashing)
         {
-            rb.velocity = DashVector * DashSpeed + Physics.gravity * .69f;
+            rb.velocity = DashVector * DashSpeed;
         }
+    }
+    //
+    //JumpVoid
+    public void Jump()
+    {
+        if (Jumping)
+        {
+            rb.AddForce(Vector3.up * JumpSpeed, ForceMode.Impulse);
+        }
+
     }
 }
