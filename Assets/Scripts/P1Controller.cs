@@ -45,6 +45,11 @@ public class P1Controller : MonoBehaviour
     public float MinFallSpeed = 0f;
     public float MaxFallSpeed = 10f;
     public float FallTimeInSky = 0.0f;
+    //
+    //HitBall
+    [Header("Hit")]
+    public float maxRayDistance;
+    public float upForce;
 
     private void Start()
     {
@@ -156,6 +161,21 @@ public class P1Controller : MonoBehaviour
         inputVector += transform.right * horizontal;
         inputVector.Normalize();
         //
+
+        //HitBall
+        Ray AimRay = new Ray(transform.position, transform.forward);
+
+        Debug.DrawRay(AimRay.origin, AimRay.direction * maxRayDistance, Color.cyan);
+
+        RaycastHit mouseHit = new RaycastHit();
+
+        if(Physics.Raycast(AimRay, out mouseHit, maxRayDistance, 8))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                mouseHit.rigidbody.velocity = new Vector3(0f, upForce, 0f);
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
