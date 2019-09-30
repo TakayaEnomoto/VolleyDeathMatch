@@ -13,7 +13,10 @@ public class P1Controller : MonoBehaviour
 
     public GameObject VisualBox;
 
+    public float LerpTime = .3f;
+
     //Dash
+    [Header("Dash")]
     public float DashCount = 0f;
     public float DashCountDefault;
     public float DashTime = .2f;
@@ -23,14 +26,22 @@ public class P1Controller : MonoBehaviour
     public Vector3 DashVector;
     //
     //Jump
+    [Header("Jump")]
     public bool canJump = true;
     public bool Jumping = false;
     public float JumpSpeed;
-    public Vector3 MaxJumpSpeed;
-    public Vector3 MinJumpSpeed;
+    public float MaxJumpSpeed = 10f;
+    public float MinJumpSpeed = 0f;
+    public float jumpTimeInSky = 0.0f;
     public float jumpTime;
     public float jumpTimeDefault;
-
+    //
+    //Fall
+    [Header("Fall")]
+    public bool Falling = false;
+    public float MinFallSpeed = 0f;
+    public float MaxFallSpeed = 10f;
+    public float FallTimeInSky = 0.0f;
 
     private void Start()
     {
@@ -99,11 +110,20 @@ public class P1Controller : MonoBehaviour
             jumpTime -= Time.deltaTime;
         }
 
-        if(jumpTime <= 0)
+        if(jumpTime <= 0 || jumpTimeInSky >= 1f)
         {
             jumpTime = jumpTimeDefault;
             Jumping = false;
+            Falling = true;
+            jumpTimeInSky = 0f;
         }
+        //Jump();
+        //StopFalling
+        if(FallTimeInSky >= 1f)
+        {
+            FallTimeInSky = 1f;
+        }
+        
 
         //View
         mouseX = Input.GetAxis("Mouse X");
@@ -122,11 +142,24 @@ public class P1Controller : MonoBehaviour
         //
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        //StopFall && Reset canJump
+        if (collision.gameObject.tag == "Floor")
+        {
+            Falling = false;
+            FallTimeInSky = 0f;
+            canJump = true;
+        }
+        //
+    }
+
     void FixedUpdate()
     {
-        rb.velocity = inputVector * moveSpeed + Physics.gravity * .3f;
+        rb.velocity = inputVector * moveSpeed;
         Dash();
         Jump();
+        Fall();
     }
 
     //DashVoid
@@ -143,8 +176,19 @@ public class P1Controller : MonoBehaviour
     {
         if (Jumping)
         {
-            rb.AddForce(Vector3.up * JumpSpeed, ForceMode.Impulse);
+            rb.velocity += Vector3.up * Mathf.Lerp(MaxJumpSpeed, MinJumpSpeed, jumpTimeInSky);
+            jumpTimeInSky += LerpTime * Time.deltaTime;
         }
 
+    }
+    //
+    //FallVoid
+    public void Fall()
+    {
+        if (Falling)
+        {
+            rb.velocity += Vector3.down * Mathf.Lerp(MinFallSpeed, MaxFallSpeed, FallTimeInSky);
+            FallTimeInSky += LerpTime * Time.deltaTime;
+        }
     }
 }
