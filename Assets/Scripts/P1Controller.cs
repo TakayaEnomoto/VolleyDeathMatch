@@ -12,6 +12,8 @@ public class P1Controller : MonoBehaviour
 
     public GameObject VisualBox;
 
+    public Vector3 TempSpeed;
+
     //Dash
     [Header("Dash")]
     public float MaxDashSpeed = 10f;
@@ -130,7 +132,7 @@ public class P1Controller : MonoBehaviour
             Falling = true;
             jumpTimeInSky = 0f;
         }
-        //Jump();
+        Jump();
         //Reset FallTimeInSky
         if(FallTimeInSky >= 1f)
         {
@@ -152,6 +154,7 @@ public class P1Controller : MonoBehaviour
 
         inputVector = transform.forward * vertical;
         inputVector += transform.right * horizontal;
+        inputVector.Normalize();
         //
     }
 
@@ -169,29 +172,31 @@ public class P1Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = inputVector * moveSpeed;
+        TempSpeed = inputVector * moveSpeed;
         Dash();
-        Jump();
-        Fall();
+        rb.velocity = new Vector3(TempSpeed.x, rb.velocity.y, TempSpeed.z);
+        //Jump();
+        //Fall();
     }
 
     //DashVoid
     public void Dash()
     {
         if (Dashing)
-        {
-            rb.velocity = DashVector * Mathf.Lerp(MaxDashSpeed, MinDashSpeed, DashingTime);
-            DashingTime += DashLerp * Time.deltaTime;
+        { 
+            TempSpeed += (DashVector * (Mathf.Lerp(MaxDashSpeed, MinDashSpeed, DashingTime)));
+            DashingTime += DashLerp * Time.fixedDeltaTime;
         }
     }
     //
     //JumpVoid
     public void Jump()
     {
-        if (Jumping)
+        //if (Jumping)
+        if(Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            rb.velocity += Vector3.up * Mathf.Lerp(MaxJumpSpeed, MinJumpSpeed, jumpTimeInSky);
-            jumpTimeInSky += LerpTime * Time.deltaTime;
+            rb.velocity += Vector3.up * MaxJumpSpeed;//Mathf.Lerp(MaxJumpSpeed, MinJumpSpeed, jumpTimeInSky);
+            jumpTimeInSky += LerpTime * Time.fixedDeltaTime;
         }
 
     }
@@ -202,7 +207,7 @@ public class P1Controller : MonoBehaviour
         if (Falling)
         {
             rb.velocity += Vector3.down * Mathf.Lerp(MinFallSpeed, MaxFallSpeed, FallTimeInSky);
-            FallTimeInSky += LerpTime * Time.deltaTime;
+            FallTimeInSky += LerpTime * Time.fixedDeltaTime;
         }
     }
 }
