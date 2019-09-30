@@ -5,7 +5,6 @@ using UnityEngine;
 public class P1Controller : MonoBehaviour
 {
     public float moveSpeed = 1f;
-    public float DashSpeed = 10f;
 
     public Vector3 inputVector;
 
@@ -13,23 +12,25 @@ public class P1Controller : MonoBehaviour
 
     public GameObject VisualBox;
 
-    public float LerpTime = .3f;
-
     //Dash
     [Header("Dash")]
+    public float MaxDashSpeed = 10f;
+    public float MinDashSpeed = 0f;
     public float DashCount = 0f;
     public float DashCountDefault;
     public float DashTime = .2f;
     public float DashTimeDefault = .2f;
+    public float DashingTime = 0f;
+    public float DashLerp = 1f;
     public bool canDash = true;
     public bool Dashing = false;
     public Vector3 DashVector;
     //
     //Jump
     [Header("Jump")]
+    public float LerpTime = 2f;
     public bool canJump = true;
     public bool Jumping = false;
-    public float JumpSpeed;
     public float MaxJumpSpeed = 10f;
     public float MinJumpSpeed = 0f;
     public float jumpTimeInSky = 0.0f;
@@ -63,7 +64,14 @@ public class P1Controller : MonoBehaviour
         }
         else
         {
-            canDash = false;
+            if(DashVector == Vector3.zero)
+            {
+                
+            }
+            else
+            {
+                canDash = false;
+            }
         }
 
         if (canDash)
@@ -91,6 +99,11 @@ public class P1Controller : MonoBehaviour
         {
             DashTime = DashTimeDefault;
             Dashing = false;
+            DashingTime = 0f;
+        }
+        if(DashingTime >= 1f)
+        {
+            DashingTime = 1f;
         }
         else
         {
@@ -118,7 +131,7 @@ public class P1Controller : MonoBehaviour
             jumpTimeInSky = 0f;
         }
         //Jump();
-        //StopFalling
+        //Reset FallTimeInSky
         if(FallTimeInSky >= 1f)
         {
             FallTimeInSky = 1f;
@@ -167,7 +180,8 @@ public class P1Controller : MonoBehaviour
     {
         if (Dashing)
         {
-            rb.velocity = DashVector * DashSpeed;
+            rb.velocity = DashVector * Mathf.Lerp(MaxDashSpeed, MinDashSpeed, DashingTime);
+            DashingTime += DashLerp * Time.deltaTime;
         }
     }
     //
