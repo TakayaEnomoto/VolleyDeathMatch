@@ -14,6 +14,10 @@ public class P1Controller : MonoBehaviour
 
     public Vector3 TempSpeed;
 
+    public float gravity;
+
+    public float mouseX;
+    public float mouseY;
     //Dash
     [Header("Dash")]
     public float MaxDashSpeed = 10f;
@@ -30,36 +34,25 @@ public class P1Controller : MonoBehaviour
     //
     //Jump
     [Header("Jump")]
-    public float LerpTime = 2f;
     public bool canJump = true;
-    public bool Jumping = false;
     public float MaxJumpSpeed = 10f;
-    public float MinJumpSpeed = 0f;
-    public float jumpTimeInSky = 0.0f;
-    public float jumpTime;
-    public float jumpTimeDefault;
-    //
-    //Fall
-    [Header("Fall")]
-    public bool Falling = false;
-    public float MinFallSpeed = 0f;
-    public float MaxFallSpeed = 10f;
-    public float FallTimeInSky = 0.0f;
+    public GameObject footcanJump;
+    public float jumpRayDistance;
     //
     //HitBall
     [Header("Hit")]
     public float maxRayDistance;
     public float upForce;
+    public float forwardForce;
+    public Vector3 punchDirection;
+    public float downwardDirection;
 
     private void Start()
     {
+        //Cursor.visible = false;//Hide the cursor
         rb = GetComponent<Rigidbody>();
         DashTime = DashTimeDefault;
-        jumpTime = jumpTimeDefault;
     }
-
-    public float mouseX;
-    public float mouseY;
 
     private void Update()
     {
@@ -83,7 +76,7 @@ public class P1Controller : MonoBehaviour
 
         if (canDash)
         {
-            if (Input.GetKeyDown(KeyCode.RightShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 DashVector = inputVector;
                 Dashing = true;
@@ -119,32 +112,21 @@ public class P1Controller : MonoBehaviour
         //
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Slash) && canJump)
+        //Detect canJump
+        int floorLayer = 1 << 9;
+        Ray jumpRay = new Ray(footcanJump.transform.position, -footcanJump.transform.up);
+        Debug.DrawRay(jumpRay.origin, jumpRay.direction * jumpRayDistance, Color.green);
+        if (Physics.Raycast(jumpRay, jumpRayDistance, floorLayer))
         {
-            Jumping = true;
+            canJump = true;
+        }
+        else
+        {
             canJump = false;
         }
-
-        if (Jumping)
-        {
-            jumpTime -= Time.deltaTime;
-        }
-
-        if(jumpTime <= 0 || jumpTimeInSky >= 1f)
-        {
-            jumpTime = jumpTimeDefault;
-            Jumping = false;
-            Falling = true;
-            jumpTimeInSky = 0f;
-        }
+        //
         Jump();
-        //Reset FallTimeInSky
-        if(FallTimeInSky >= 1f)
-        {
-            FallTimeInSky = 1f;
-        }
         
-
         //View
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
@@ -162,30 +144,25 @@ public class P1Controller : MonoBehaviour
         inputVector.Normalize();
         //
 
-        //HitBall
-        Ray AimRay = new Ray(transform.position, transform.forward);
+        //HitBallUp
+        int layermask = 1 << 8;
+        Ray AimRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
         Debug.DrawRay(AimRay.origin, AimRay.direction * maxRayDistance, Color.cyan);
 
         RaycastHit mouseHit = new RaycastHit();
 
-        if(Physics.Raycast(AimRay, out mouseHit, maxRayDistance, 8))
+        if(Physics.Raycast(AimRay, out mouseHit, maxRayDistance, layermask))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 mouseHit.rigidbody.velocity = new Vector3(0f, upForce, 0f);
             }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //StopFall && Reset canJump
-        if (collision.gameObject.tag == "Floor")
-        {
-            Falling = false;
-            FallTimeInSky = 0f;
-            canJump = true;
+            if (Input.GetMouseButtonDown(0))
+            {
+                punchDirection = new Vector3(Camera.main.transform.forward.x, downwardDirection, Camera.main.transform.forward.z);
+                mouseHit.rigidbody.velocity = punchDirection * forwardForce;
+            }
         }
         //
     }
@@ -195,6 +172,7 @@ public class P1Controller : MonoBehaviour
         TempSpeed = inputVector * moveSpeed;
         Dash();
         rb.velocity = new Vector3(TempSpeed.x, rb.velocity.y, TempSpeed.z);
+        rb.velocity -= new Vector3(0f, gravity, 0f) * Time.fixedDeltaTime;
         //Jump();
         //Fall();
     }
@@ -212,22 +190,12 @@ public class P1Controller : MonoBehaviour
     //JumpVoid
     public void Jump()
     {
-        //if (Jumping)
         if(Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            rb.velocity += Vector3.up * MaxJumpSpeed;//Mathf.Lerp(MaxJumpSpeed, MinJumpSpeed, jumpTimeInSky);
-            jumpTimeInSky += LerpTime * Time.fixedDeltaTime;
+            canJump = false;
+            rb.velocity += Vector3.up * MaxJumpSpeed;
         }
 
     }
     //
-    //FallVoid
-    public void Fall()
-    {
-        if (Falling)
-        {
-            rb.velocity += Vector3.down * Mathf.Lerp(MinFallSpeed, MaxFallSpeed, FallTimeInSky);
-            FallTimeInSky += LerpTime * Time.fixedDeltaTime;
-        }
-    }
 }
