@@ -6,6 +6,7 @@ public class FloorFall : MonoBehaviour
 {
     public Rigidbody rb;
     public float upForce;
+    public float forwardforce;
 
     void Start()
     {
@@ -27,6 +28,10 @@ public class FloorFall : MonoBehaviour
             collision.rigidbody.constraints = a;
 
             rb.velocity = new Vector3(0f, upForce, 0f);
+        }
+        if(collision.gameObject.tag == "BotFloor")
+        {
+            rb.velocity = new Vector3(0f, upForce, forwardforce);
         }
     }
 }

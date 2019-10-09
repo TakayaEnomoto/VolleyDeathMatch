@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Destroy.cs" />
     <Compile Include="Assets\Scripts\FloorFall.cs" />
     <Compile Include="Assets\Scripts\P1Controller.cs" />
+    <Compile Include="Assets\Scripts\RobotControl.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/NYU/Unity3D2/Projects/VolleyBallDeathMatch/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

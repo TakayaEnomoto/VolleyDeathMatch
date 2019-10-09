@@ -50,6 +50,7 @@ public class P1Controller : MonoBehaviour
     private void Start()
     {
         //Cursor.visible = false;//Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         DashTime = DashTimeDefault;
     }
