@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class P1Controller : MonoBehaviour
 {
+    public static P1Controller player;
+
+    public int P1Lives = 3;
     public float moveSpeed = 1f;
 
     public Vector3 inputVector;
@@ -47,7 +50,12 @@ public class P1Controller : MonoBehaviour
     public Vector3 punchDirection;
     public float downwardDirection;
 
-    private void Start()
+    public void Awake()
+    {
+        player = this;
+    }
+
+    public void Start()
     {
         //Cursor.visible = false;//Hide the cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -116,7 +124,7 @@ public class P1Controller : MonoBehaviour
         //Detect canJump
         int floorLayer = 1 << 9;
         Ray jumpRay = new Ray(footcanJump.transform.position, -footcanJump.transform.up);
-        Debug.DrawRay(jumpRay.origin, jumpRay.direction * jumpRayDistance, Color.green);
+        Debug.DrawRay(jumpRay.origin, jumpRay.direction * jumpRayDistance, Color.red);
         if (Physics.Raycast(jumpRay, jumpRayDistance, floorLayer))
         {
             canJump = true;
@@ -137,11 +145,35 @@ public class P1Controller : MonoBehaviour
 
 
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        /*
+        Vector3 WalkVector = Vector2.zero;
+        bool haveInput = false;
+        if (Input.GetKey(KeyCode.W))
+        {
+            WalkVector.z += 1;
+            haveInput = true;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            WalkVector.z -= 1;
+            haveInput = true;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            WalkVector.x -= 1;
+            haveInput = true;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            WalkVector.x += 1;
+            haveInput = true;
+        }
+        */
         inputVector = transform.forward * vertical;
         inputVector += transform.right * horizontal;
+        //inputVector = WalkVector.normalized;
         inputVector.Normalize();
         //
 
@@ -161,7 +193,7 @@ public class P1Controller : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-                punchDirection = new Vector3(Camera.main.transform.forward.x, downwardDirection, Camera.main.transform.forward.z);
+                punchDirection = new Vector3(Camera.main.transform.forward.x, Camera.main.transform.forward.y, Camera.main.transform.forward.z);
                 mouseHit.rigidbody.velocity = punchDirection * forwardForce;
             }
         }

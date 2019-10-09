@@ -31,7 +31,7 @@ public class Destroy : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0f, upforce, forwardforce);
         }else if(other.tag == "Player")
         {
-            SceneManager.LoadScene("End");
+            //SceneManager.LoadScene("End");
         }
     }
 }

@@ -124,4 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   upForce: 9
-  forwardforce: -5
+  forwardforce: -6
+  minVelocity: 3
+  maxVelocity: 7

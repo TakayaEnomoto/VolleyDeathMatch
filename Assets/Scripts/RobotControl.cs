@@ -15,7 +15,7 @@ public class RobotControl : MonoBehaviour
     }
     void Start()
     {
-
+        lives = 3;
     }
 
     // Update is called once per frame
