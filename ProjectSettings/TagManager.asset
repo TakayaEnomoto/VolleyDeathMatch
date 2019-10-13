@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Volleyball
   - BotFloor
+  - Pile
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - 
   - VolleyBall
   - Floor
-  - 
-  - 
+  - TransWall
+  - Player
   - 
   - 
   - 

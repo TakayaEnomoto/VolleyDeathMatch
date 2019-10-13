@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FloorFall : MonoBehaviour
 {
@@ -18,13 +19,19 @@ public class FloorFall : MonoBehaviour
     void Update()
     {
         //Change to xyz
-        if(rb.velocity.magnitude <= minVelocity)
+        /*if(rb.velocity.z <= minVelocity)
         {
-            rb.velocity = rb.velocity.normalized * minVelocity;
+            rb.velocity += new Vector3(0f, 0f, minVelocity);
         }
         if(rb.velocity.magnitude >= maxVelocity)
         {
             rb.velocity = rb.velocity.normalized * maxVelocity;
+        }*/
+
+        //End Game
+        if(RobotControl.Main.lives <= 0 || P1Controller.player.P1Lives <= 0)
+        {
+            SceneManager.LoadScene("End");
         }
     }
 
@@ -34,6 +41,7 @@ public class FloorFall : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             P1Controller.player.P1Lives -= 1;
+            rb.velocity += new Vector3(0f, upForce, 0f);
             /*
             RigidbodyConstraints a = new RigidbodyConstraints();
             a = RigidbodyConstraints.FreezeRotation;
@@ -42,9 +50,14 @@ public class FloorFall : MonoBehaviour
             rb.velocity += new Vector3(0f, upForce, 0f);
             */
         }
-        if(collision.gameObject.tag == "BotFloor")
+        if(collision.gameObject.tag == "Pile")
         {
             RobotControl.Main.lives -= 1;
+            Destroy(collision.gameObject);
+            rb.velocity += new Vector3(0f, upForce, 0f);
+        }
+        if(collision.gameObject.tag == "BotFloor")
+        {
             rb.velocity += new Vector3(0f, upForce, 0f);
         }
         /*
