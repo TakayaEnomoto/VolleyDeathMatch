@@ -73,6 +73,7 @@ public class FloorFall : MonoBehaviour
         ballBounceTimes -= 1;
         if(ballBounceTimes == 0)
         {
+            camShake.me.ShakeScreen(new Vector3(.05f, 0.2f), 0.1f);
             rb.velocity = Vector3.down * startVel;
             transform.position = startPos;
             ballBounceTimes = ballBounceTimesDefault;
@@ -80,6 +81,7 @@ public class FloorFall : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             P1Controller.player.P1Lives -= 1;
+            camShake.me.ShakeScreen(new Vector3(.05f, 0.2f), 0.1f);
             rb.velocity = Vector3.down * startVel;
             transform.position = startPos;
             ballBounceTimes = ballBounceTimesDefault;
