@@ -88,7 +88,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485472453433318510}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 67b85f31c9fc4be43a50281ac5bb5774, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -105,7 +105,7 @@ Rigidbody:
   m_Mass: 0.3
   m_Drag: 0
   m_AngularDrag: 10
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -126,4 +126,6 @@ MonoBehaviour:
   upForce: 9
   forwardforce: -6
   minVelocity: 3
-  maxVelocity: 7
+  maxVelocity: 10
+  startVel: 5
+  startPos: {x: 0, y: 0, z: 0}
