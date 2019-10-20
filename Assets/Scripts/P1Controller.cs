@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class P1Controller : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class P1Controller : MonoBehaviour
 
     public float mouseX;
     public float mouseY;
+
+    public Text Life;
+    //Sounds
+    [Header("Sounds")]
+    public AudioSource dash;
+    public AudioSource loseHP;
+    public AudioSource jump;
     //Dash
     [Header("Dash")]
     public float MaxDashSpeed = 10f;
@@ -65,6 +73,7 @@ public class P1Controller : MonoBehaviour
 
     private void Update()
     {
+        Life.text = "Your lives: " + P1Lives;
         //Dash
         if(DashCount <= 0f)
         {
@@ -79,6 +88,7 @@ public class P1Controller : MonoBehaviour
             }
             else
             {
+                //dash.Play();
                 canDash = false;
             }
         }
@@ -87,6 +97,8 @@ public class P1Controller : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                if(dash.isPlaying == false)
+                    dash.Play();
                 DashVector = inputVector;
                 Dashing = true;
                 DashCount = DashCountDefault;
@@ -225,6 +237,7 @@ public class P1Controller : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && canJump)
         {
+            jump.Play();
             canJump = false;
             rb.velocity += Vector3.up * MaxJumpSpeed;
         }

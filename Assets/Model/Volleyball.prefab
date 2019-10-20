@@ -126,6 +126,23 @@ MonoBehaviour:
   upForce: 9
   forwardforce: -6
   minVelocity: 3
-  maxVelocity: 10
+  maxVelocity: 7.8
   startVel: 5
+  ballBounceTimes: 0
+  ballBounceTimesDefault: 7
   startPos: {x: 0, y: 0, z: 0}
+  volleyball: {fileID: 485472453433318510}
+  sixColor: {r: 0.1004361, g: 0.5754717, b: 0.32830742, a: 1}
+  sevenColor: {r: 0.0481043, g: 0.21698111, b: 0.058245357, a: 1}
+  fourColor: {r: 0.52385384, g: 0.7372549, b: 0.086274505, a: 1}
+  threeColor: {r: 0.8378159, g: 0.8679245, b: 0.07778566, a: 1}
+  twoColor: {r: 0.8666667, g: 0.57754415, b: 0.07843137, a: 1}
+  oneColor: {r: 0.8666667, g: 0.21240653, b: 0.07843137, a: 1}
+  ballColor: {r: 0.08677464, g: 0.735849, b: 0.28233474, a: 1}
+  countinst: 0
+  instTime: 0
+  defaultinstTime: 3
+  hitwall: {fileID: 0}
+  desBall: {fileID: 0}
+  desPile: {fileID: 0}
+  exp: {fileID: 4411543587348689943, guid: a6f03f5f2150fb04489c20a523411121, type: 3}

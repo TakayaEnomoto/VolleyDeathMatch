@@ -12,16 +12,30 @@ public class FloorFall : MonoBehaviour
     public float maxVelocity;
     public float startVel;
     public int ballBounceTimes;
-    public int ballBounceTimesDefault = 5;
+    public int ballBounceTimesDefault;
     public Vector3 startPos;
 
+    public GameObject volleyball;
+
+    public Color sixColor;
+    public Color sevenColor;
     public Color fourColor;
     public Color threeColor;
     public Color twoColor;
     public Color oneColor;
     public Color ballColor;
 
+    public bool countinst = false;
+    public float instTime;
+    public float defaultinstTime;
+
     public static FloorFall Me;
+
+    public AudioSource hitwall;
+    public AudioSource desBall;
+    public AudioSource desPile;
+
+    public ParticleSystem exp;
 
     private void Awake()
     {
@@ -30,6 +44,7 @@ public class FloorFall : MonoBehaviour
 
     void Start()
     {
+        instTime = defaultinstTime;
         startPos = transform.position;
         ballBounceTimes = ballBounceTimesDefault;
         rb = GetComponent<Rigidbody>();
@@ -48,6 +63,10 @@ public class FloorFall : MonoBehaviour
 
         //change ball color
         var ballRenderer = GetComponent<MeshRenderer>();
+        if (ballBounceTimes == 7)
+            ballRenderer.material.color = sevenColor;
+        if (ballBounceTimes == 6)
+            ballRenderer.material.color = sixColor;
         if(ballBounceTimes == 5)
             ballRenderer.material.color = ballColor;
         if (ballBounceTimes == 4)
@@ -65,23 +84,37 @@ public class FloorFall : MonoBehaviour
         {
             SceneManager.LoadScene("End");
         }
+
+        if (countinst)
+            instTime -= Time.deltaTime;
+
+        if (instTime <= 0)
+        {
+            countinst = false;
+            instTime = defaultinstTime;
+            Instantiate(volleyball, startPos, transform.rotation);
+        }
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
         ballBounceTimes -= 1;
+        //if(hitwall.isPlaying == false)
+        hitwall.Play();
         if(ballBounceTimes == 0)
         {
-            camShake.me.ShakeScreen(new Vector3(.05f, 0.2f), 0.1f);
+            hitwall.Stop();
+            desBall.Play();
             rb.velocity = Vector3.down * startVel;
             transform.position = startPos;
             ballBounceTimes = ballBounceTimesDefault;
         }
         if (collision.gameObject.tag == "Floor")
         {
+            hitwall.Stop();
+            P1Controller.player.loseHP.Play();
             P1Controller.player.P1Lives -= 1;
-            camShake.me.ShakeScreen(new Vector3(.05f, 0.2f), 0.1f);
             rb.velocity = Vector3.down * startVel;
             transform.position = startPos;
             ballBounceTimes = ballBounceTimesDefault;
@@ -95,8 +128,12 @@ public class FloorFall : MonoBehaviour
         }
         if(collision.gameObject.tag == "Pile")
         {
+            hitwall.Stop();
+            desPile.Play();
             RobotControl.Main.lives -= 1;
+            Instantiate(exp, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
+            countinst = true;
         }
         /*
         Vector3 velocity = rb.velocity;
