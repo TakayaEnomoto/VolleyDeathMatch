@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -209,7 +209,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577216160}
   serializedVersion: 6
-  lengthInSec: 2
+  lengthInSec: 1.2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -835,7 +835,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: -90, z: 0}
+    m_Rotation: {x: 0, y: -118.7, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -915,7 +915,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 40
+      value: 4.4
       mode: 0
       spread: 0
       speed:
@@ -4169,19 +4169,19 @@ ParticleSystem:
     sizeAffectsWidth: 0
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
-    generateLightingData: 0
+    generateLightingData: 1
     splitSubEmitterRibbons: 1
     attachRibbonsToTransform: 0
     colorOverLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 0.8962264, g: 0.802568, b: 0.14796188, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.9811321, g: 0.6227437, b: 0, a: 1}
+        key1: {r: 0.94737357, g: 1, b: 0.6273585, a: 1}
+        key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -4189,7 +4189,7 @@ ParticleSystem:
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
         ctime1: 65535
-        ctime2: 0
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -4925,7 +4925,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577216160}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 37, y: 2.1, z: 87}
+  m_LocalPosition: {x: 44.2, y: 3.5, z: 87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5004,7 +5004,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: -32.029854, y: 6.9022004e-16, z: 5.69e-43, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1.7566255e+14}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5077,8 +5077,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 22524aa2e955bad49bc5565ddd5631cf, type: 3}
     m_FontSize: 200
@@ -6013,7 +6011,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 90.05, z: 0}
+    m_Rotation: {x: 0, y: 59.29, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -6093,7 +6091,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 40
+      value: 5.6
       mode: 0
       spread: 0
       speed:
@@ -9347,18 +9345,18 @@ ParticleSystem:
     sizeAffectsWidth: 0
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
-    generateLightingData: 0
+    generateLightingData: 1
     splitSubEmitterRibbons: 1
     attachRibbonsToTransform: 0
     colorOverLifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 0.7830189, g: 0.75290465, b: 0.08495018, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 1, g: 0.75866497, b: 0.07075471, a: 1}
+        key1: {r: 1, g: 1, b: 0.8254717, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9469,7 +9467,7 @@ ParticleSystem:
     colorOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
+      minColor: {r: 1, g: 0.98872304, b: 0.033018887, a: 1}
       maxColor: {r: 0.8301887, g: 0.5801359, b: 0.07440368, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -10103,7 +10101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348876001}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -33.1, y: 2.1, z: 87}
+  m_LocalPosition: {x: -46.5, y: 2.1, z: 87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10291,8 +10289,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 22524aa2e955bad49bc5565ddd5631cf, type: 3}
     m_FontSize: 70
